@@ -1724,3 +1724,8 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+
+/* Add your additional styles here */
+ul li span strong {
+  color: #cda45e;
+}
