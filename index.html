@@ -114,6 +114,9 @@
           <div class="col-lg-8 d-flex flex-column align-items-center align-items-lg-start">
             <h2 data-aos="fade-up" data-aos-delay="100">Welcome to <span>Unaisa Tex</span></h2>
             <p data-aos="fade-up" data-aos-delay="200">A sourcing partner you can rely</p>
+            <div class="containerx" data-aos="fade-up" data-aos-delay="200">
+              <span class="animatetext typewriter"></span>
+            </div>
             <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
               <a href="#products" class="cta-btn">Our Products</a>
               <a href="#contact" class="cta-btn">Reach Us</a>
@@ -1218,6 +1221,49 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const words = ["Idea", "Innovation", "Collection", "Negotiation", "Execution", "Satisfaction"];
+      let i = 0;
+      const typewriterElement = document.querySelector('.typewriter');
+
+      function typeWriter() {
+        let word = words[i];
+        let txt = '';
+        let charIndex = 0;
+        const speed = 200;
+
+        function type() {
+          if (charIndex < word.length) {
+            txt += word.charAt(charIndex);
+            typewriterElement.innerHTML = txt;
+            charIndex++;
+            setTimeout(type, speed);
+          } else {
+            setTimeout(erase, 2000); // Wait before erasing
+          }
+        }
+
+        function erase() {
+          if (charIndex >= 0) {
+            typewriterElement.innerHTML = word.substring(0, charIndex);
+            charIndex--;
+            setTimeout(erase, speed);
+          } else {
+            i = (i + 1) % words.length; // Move to the next word
+            setTimeout(typeWriter, 500); // Wait before typing next word
+          }
+        }
+
+        type();
+      }
+
+      typeWriter();
+    });
+  </script>
+
 
 </body>
 
