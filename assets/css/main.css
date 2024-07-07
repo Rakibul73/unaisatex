@@ -1159,65 +1159,26 @@ section,
 
 .menu .menu-item {
   margin-top: 50px;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu .menu-img {
-  width: 80px;
-  border-radius: 50%;
-  float: left;
+  width: 100%;
+  max-width: 300px; /* Adjusted size to be smaller */
+  height: auto;
+  border-radius: 10px;
   border: 8px solid color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
-.menu .menu-content {
-  margin-left: 95px;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
+@media (min-width: 768px) {
+  .menu .menu-item {
+    flex: 0 0 33.333%; /* Three items per row */
+  }
 }
 
-.menu .menu-content::after {
-  content: "......................................................................" "...................................................................." "....................................................................";
-  position: absolute;
-  left: 20px;
-  right: 0;
-  top: -4px;
-  z-index: 1;
-  color: color-mix(in srgb, var(--default-color), transparent 60%);
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-}
 
-.menu .menu-content a {
-  color: var(--heading-color);
-  background: var(--background-color);
-  padding-right: 10px;
-  position: relative;
-  z-index: 3;
-  font-weight: 700;
-  transition: 0.3s;
-}
-
-.menu .menu-content a:hover {
-  color: var(--accent-color);
-}
-
-.menu .menu-content span {
-  background: var(--background-color);
-  color: var(--accent-color);
-  position: relative;
-  z-index: 3;
-  padding: 0 10px;
-  font-weight: 600;
-}
-
-.menu .menu-ingredients {
-  margin-left: 95px;
-  font-style: italic;
-  font-size: 14px;
-  font-family: var(--nav-font);
-  color: color-mix(in srgb, var(--default-color), transparent 50%);
-}
 
 /*--------------------------------------------------------------
 # Specials Section
