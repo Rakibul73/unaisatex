@@ -580,7 +580,7 @@ h6 {
   color: var(--default-color);
   background-color: var(--background-color);
   font-size: 14px;
-  padding-bottom: 50px;
+  padding-bottom: 5px;
   position: relative;
 }
 
@@ -609,7 +609,7 @@ h6 {
 
 .footer .footer-about p {
   font-size: 14px;
-  font-family: var(--heading-font);
+  font-family: var(--default-font);
 }
 
 .footer .social-links a {
@@ -1709,3 +1709,33 @@ ul li span strong {
   50% { border-color: black; }
 }
 
+
+
+/* Center images within the Swiper slides */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.event-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.event-item .col-lg-6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.event-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
