@@ -114,6 +114,34 @@
     });
 
     /**
+     * Reveal AOS elements in the current viewport (fixes blank sections
+     * after smooth-scroll / hash navigation where AOS positions get stale).
+     */
+    function refreshAOS() {
+        try {
+            if (typeof AOS !== "undefined" && AOS.refresh) {
+                AOS.refresh();
+            }
+        } catch (e) {}
+    }
+
+    /**
+     * Force the client/partner/certification carousel sections to be visible.
+     * AOS caches element positions before Swiper lays out these carousels,
+     * which can leave them stuck at opacity:0 on a direct jump. Forcing the
+     * `aos-animate` class guarantees the images show regardless of scroll.
+     */
+    function forceRevealSections() {
+        ["#clients", "#partners", "#certification", "#contact"].forEach(function (sel) {
+            document
+                .querySelectorAll(sel + " [data-aos]")
+                .forEach(function (el) {
+                    el.classList.add("aos-animate");
+                });
+        });
+    }
+
+    /**
      * Init isotope layout and filters
      */
     document
@@ -155,9 +183,7 @@
                             initIsotope.arrange({
                                 filter: this.getAttribute("data-filter"),
                             });
-                            if (typeof aosInit === "function") {
-                                aosInit();
-                            }
+                            refreshAOS();
                         },
                         false
                     );
@@ -183,9 +209,33 @@
                     new Swiper(swiperElement, config);
                 }
             });
+        refreshAOS();
+        forceRevealSections();
     }
 
     window.addEventListener("load", initSwiper);
+
+    /**
+     * Reveal AOS elements after navigating to a section via an anchor link.
+     * Smooth-scroll jumps can leave AOS positions stale, so we refresh once
+     * the target section has entered the viewport.
+     */
+    function handleAnchorNavigation() {
+        refreshAOS();
+        forceRevealSections();
+        setTimeout(forceAOSReveal, 100);
+        setTimeout(forceAOSReveal, 700);
+    }
+
+    function forceAOSReveal() {
+        refreshAOS();
+        forceRevealSections();
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener("click", handleAnchorNavigation);
+    });
+    window.addEventListener("hashchange", handleAnchorNavigation);
 
     /**
      * Correct scrolling position upon page load for URLs containing hash links.
